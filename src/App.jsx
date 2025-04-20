@@ -12,9 +12,6 @@ import Login from "./pages/login";
 
 function App() {
   const { modals, updateModals } = useContextProvider();
-  useEffect(() => {
-    console.log("modals", modals);
-  }, [modals]);
   return (
     <div className="">
       {modals.login && (
