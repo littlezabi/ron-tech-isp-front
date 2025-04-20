@@ -1,10 +1,12 @@
 import React from "react";
 import { Icon } from "@iconify-icon/react";
+import { useContextProvider } from "../../store/context";
 
 
 
 
 const Login = () => {
+    const { modals, updateModals } = useContextProvider();
   return (
     <div className="flex items-center justify-center">
       <div className="bg-black p-8 rounded-lg shadow-lg max-w-sm w-full text-white">
@@ -45,6 +47,13 @@ const Login = () => {
             >
               Login
             </button>
+
+                      <div className="text-center text-sm mb-6 mt-5">
+                          <p className="text-gray-400">
+                              You don't have any account?{" "}
+                              <button onClick={() => updateModals({ login: false, signup: true })} className="cursor-pointer text-blue-500 hover:underline">Register here</button>
+                          </p>
+                      </div>
           </div>
         </form>
 

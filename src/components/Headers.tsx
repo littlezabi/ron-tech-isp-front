@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify-icon/react";
-import { Modal } from "antd";
-import Login from "../pages/login";
-import SignUp from "../pages/regsiter";
+import { useContextProvider } from "../store/context";
 
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [loginOpen, setOpenLogin] = useState(false)
-    const [registerOpen, setOpenRegister] = useState(false)
 
     // Change header background color on scroll
     useEffect(() => {
@@ -27,6 +23,8 @@ const Header = () => {
         };
     }, []);
 
+    const { modals, updateModals } = useContextProvider();
+
     return (
         <header
             className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out ${isScrolled
@@ -34,40 +32,6 @@ const Header = () => {
                 : "bg-transparent h-[80px]"
                 }`}
         >
-
-<div className="absolute">
-            <Modal
-                style={{ top: 20 }}
-                className="custom-modal"
-                open={registerOpen}
-                keyboard={true}
-                centered={true}
-                onCancel={() => setOpenRegister(false)}
-                okButtonProps={{ hidden: true }}
-                cancelButtonProps={{ hidden: true }}
-                styles={{ body: { backgroundColor: 'black', color: 'white' } }}
-                closeIcon={<Icon icon="mdi:close" style={{ color: 'white' }} />}
-            >
-                <SignUp/>
-            </Modal>
-
-
-            <Modal
-                style={{ top: 20 }}
-                className="custom-modal"
-                open={loginOpen}
-                keyboard={true}
-                centered={true}
-                onCancel={() => setOpenLogin(false)}
-                okButtonProps={{ hidden: true }}
-                cancelButtonProps={{ hidden: true }}
-                styles={{ body: { backgroundColor: 'black', color: 'white' } }}
-                closeIcon={<Icon icon="mdi:close" style={{ color: 'white' }} />}
-            >
-                <Login />
-            </Modal>
-</div>
-
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className={`flex justify-between items-center
   ${isScrolled
@@ -117,7 +81,10 @@ const Header = () => {
                     {/* Right Side (Login & Register) */}
                     <div className="hidden md:flex space-x-4">
                         <button
-                            onClick={() => setOpenLogin(true)}
+                            onClick={
+                                () => updateModals({ login: true })
+                            }
+
                             className={`flex outline-none justify-center cursor-pointer items-center text-white pl-4 duration-300 py-2 hover:text-slate-300
 
   ${isScrolled
@@ -132,7 +99,10 @@ const Header = () => {
                             </span>
                         </button>
                         <button
-                            onClick={() => setOpenRegister(true)}
+                            onClick={
+                                () => updateModals({ signup: true })
+                            }
+
                             className={`flex outline-none justify-center cursor-pointer items-center text-white py-2 duration-300 hover:text-slate-300
   ${isScrolled
                                     ? "text-[11px]"

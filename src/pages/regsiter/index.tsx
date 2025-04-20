@@ -1,7 +1,9 @@
 import React from "react";
 import { Icon } from "@iconify-icon/react";
+import { useContextProvider } from "../../store/context";
 
 const SignUp = () => {
+    const { updateModals } = useContextProvider();
   return (
     <div className="flex items-center justify-center">
       <div className="bg-black p-8 rounded-lg shadow-lg max-w-sm w-full text-white">
@@ -50,9 +52,7 @@ const SignUp = () => {
           <div className="text-center text-sm mb-6">
             <p className="text-gray-400">
               Already have an account?{" "}
-              <a href="/login" className="text-blue-500 hover:underline">
-                Login here
-              </a>
+                          <button onClick={() => updateModals({ login: true, signup: false })} className="cursor-pointer text-blue-500 hover:underline">Login here</button>
             </p>
           </div>
         </form>
