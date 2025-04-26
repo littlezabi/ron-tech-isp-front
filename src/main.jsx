@@ -4,12 +4,8 @@ import './index.css'
 import App from './App.jsx'
 import { ContextProvider } from './store/context.js'
 
-createRoot(document.getElementById('root')).render(
-
-    <ContextProvider>
-  <StrictMode>
+createRoot(document.getElementById("root")).render(
+  <ContextProvider>
     <App />
-  </StrictMode>,
-
-    </ContextProvider>
-)
+  </ContextProvider>
+);

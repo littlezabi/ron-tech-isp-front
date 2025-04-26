@@ -1,3 +1,4 @@
+import { ModalProps } from 'antd';
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface GeneralFace {
